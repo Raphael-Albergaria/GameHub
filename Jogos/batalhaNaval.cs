@@ -1,39 +1,59 @@
 ﻿using System;
+using GameHub.Model;
+
 namespace GameHub.Jogos
 {
     public class batalhaNaval
     {
-    static string[,] arr = new string[8, 8]{
-        {" "," ","B","C","C"," "," "," "},
-        {"A"," ","B"," ","D","D","D","D"},
-        {"A"," ","B"," "," ","G"," "," "},
-        {" ","E"," ","F","F","G"," ","H"},
-        {" ","E"," "," "," ","G"," ","H"},
-        {" ","E"," "," "," "," "," ","H"},
-        {" "," "," ","I","I","I","I"," "},
-        {" ","J","J","J"," "," ","K","K"},
+        static string player1;
+        static string player2;
+        static string[,] arr = new string[8, 8]{
+        //{" "," ","B","C","C"," "," "," "},
+        //{"A"," ","B"," ","D","D","D","D"},
+        //{"A"," ","B"," "," ","G"," "," "},
+        //{" ","E"," ","F","F","G"," ","H"},
+        //{" ","E"," "," "," ","G"," ","H"},
+        //{" ","E"," "," "," "," "," ","H"},
+        //{" "," "," ","I","I","I","I"," "},
+        //{" ","J","J","J"," "," ","K","K"},
+
+        {" "," "," "," "," "," "," "," "},
+        {"A"," "," "," "," "," "," "," "},
+        {"A"," "," "," "," "," "," "," "},
+        {" "," "," "," "," "," "," "," "},
+        {" "," "," "," "," "," "," "," "},
+        {" "," "," "," "," "," "," "," "},
+        {" "," "," "," "," "," "," "," "},
+        {" "," "," "," "," "," "," "," "},
         };
 
-    static string[,] arrBoard = new string[8, 8]{
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        {" "," "," "," "," "," "," "," "},
-        };
+        static string[,] arrBoard = new string[8, 8]{
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "},
+            };
 
-    static int turn = 1;
-    static int l;
-    static int c;
-    static int controle;
-    static int player1 = 0;
-    static int player2 = 0;
+        static int turn = 1;
+        static int l;
+        static int c;
+        static int controle;
+        static int jogador1 = 0;
+        static int jogador2 = 0;
 
-    public static void BatalhaNaval()
+        public static void BatalhaNaval()
         {
+            Console.Clear();
+            Console.WriteLine();
+            Console.Write("Selecione o 1° jogador: ");
+            player1 = Jogo.SelecionarJogador();
+            Console.Clear();
+            Console.Write("Selecione o 2° jogador: ");
+            player2 = Jogo.SelecionarJogador();
             do
             {
                 Console.Clear();
@@ -50,8 +70,8 @@ namespace GameHub.Jogos
                 Board();
                 Console.Write("Em qual posição está o navio?");
                 Console.WriteLine();
-            Console.WriteLine("Digite primeiro a Linha(letra) e logo depois a Coluna(número)");
-            Console.WriteLine("Ex: C5");
+                Console.WriteLine("Digite primeiro a Linha(letra) e logo depois a Coluna(número)");
+                Console.WriteLine("Ex: C5");
                 Console.WriteLine();
 
                 string jogada = Console.ReadLine().ToUpper();
@@ -316,52 +336,80 @@ namespace GameHub.Jogos
                     default:
                         break;
                 }
-            if (arrBoard[l,c] != "X" && arrBoard[l,c] != "O")
-            {
-                if (arr[l,c] != " ")
+                if (arrBoard[l, c] != "X" && arrBoard[l, c] != "O")
                 {
-                    string temp = arr[l, c];
-                    arr[l, c] = " ";
-                    arrBoard[l, c] = "O";
-
-                    if (turn % 2 != 0) player1++;
-                    else player2++;
-
-                    int existencia = 0;
-                    foreach (var item in arr) if (item == temp) existencia++;
-
-                    if (existencia == 0)
+                    if (arr[l, c] != " ")
                     {
-                        if (turn % 2 != 0) player1++;
-                        else player2++;
+                        string temp = arr[l, c];
+                        arr[l, c] = " ";
+                        arrBoard[l, c] = "O";
+
+                        if (turn % 2 != 0) jogador1++;
+                        else jogador2++;
+
+                        int existencia = 0;
+                        foreach (var item in arr) if (item == temp) existencia++;
+
+                        if (existencia == 0)
+                        {
+                            if (turn % 2 != 0) jogador1++;
+                            else jogador2++;
+                        }
+                        turn++;
                     }
-                    turn++;
+                    else
+                    {
+                        arrBoard[l, c] = "X";
+                        turn++;
+                    }
                 }
-                else
+                controle = 0;
+                foreach (var item in arr) if (item != " ") controle++;
+            } while (controle != 0);
+            if (jogador1 > jogador2)
+            {
+                Console.WriteLine($"{player1} Ganhou!");
+                Jogador PontosGanhos = Program.jogadores.Find(delegate (Jogador j)
                 {
-                    arrBoard[l, c] = "X";
-                    turn++;
-                }
+                    return j.Nome == player1;
+                }); PontosGanhos.Pontuacao = PontosGanhos.Pontuacao + 10;
+
+                Jogador PontosPerdidos = Program.jogadores.Find(delegate (Jogador j)
+                {
+                    return j.Nome == player2;
+                }); PontosPerdidos.Pontuacao = PontosPerdidos.Pontuacao - 5;
             }
-            controle = 0;
-            foreach (var item in arr) if (item != " ") controle++;
-} while (controle != 0);
-        if(player1 > player2)
-        {
-            Console.WriteLine("O player 1 Ganhou!");
-        }
-        else if (player1 < player2)
-        {
-            Console.WriteLine("O player 2 Ganhou!");
-        }
-        else
-        {
-            Console.WriteLine("Teve empate!");
-        }
+            else if (jogador1 < jogador2)
+            {
+                Console.WriteLine($"{player2} Ganhou!");
+                Jogador PontosGanhos = Program.jogadores.Find(delegate (Jogador j)
+                {
+                    return j.Nome == player2;
+                }); PontosGanhos.Pontuacao = PontosGanhos.Pontuacao + 10;
 
+                Jogador PontosPerdidos = Program.jogadores.Find(delegate (Jogador j)
+                {
+                    return j.Nome == player1;
+                }); PontosPerdidos.Pontuacao = PontosPerdidos.Pontuacao - 5;
+            }
+            else
+            {
+                Console.WriteLine("Teve empate!");
+                Jogador PontosEmpate1 = Program.jogadores.Find(delegate (Jogador j)
+                {
+                    return j.Nome == player1;
+                }); PontosEmpate1.Pontuacao = PontosEmpate1.Pontuacao + 5;
 
+                Jogador PontosEmpate2 = Program.jogadores.Find(delegate (Jogador j)
+                {
+                    return j.Nome == player2;
+                }); PontosEmpate2.Pontuacao = PontosEmpate2.Pontuacao + 5;
+            }
 
-    }
+            Jogo.DeslogarJogador(player1, player2);
+            Jogo.AtualizarJogo();
+            Console.ReadKey();
+        }
     private static void Board()
     {
         Console.WriteLine("    1   2   3   4   5   6   7   8    ");

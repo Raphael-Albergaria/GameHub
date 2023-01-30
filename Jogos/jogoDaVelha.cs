@@ -1,30 +1,43 @@
+using GameHub.Model;
+using GameHub.Repository;
+
 namespace GameHub.Jogos
 {
     public class jogoDaVelha
     {
-        static string[,] arr = new string[3, 3] { { "1", "2", "3" },{ "4", "5", "6" },{ "7", "8", "9" } };
+        //static string vencedor;
+        //static string perdedordor;
+        static string player1;
+        static string player2;
+        static string[,] arr;
         static int turn = 1; 
         static int l;
         static int c;
         static int controle = 0;
-        static void JogodaVelha(string[] args)
+        public static void JogoDaVelha()
         {
+            arr = new string[3, 3] { { "1", "2", "3" }, { "4", "5", "6" }, { "7", "8", "9" } };
+            Console.Clear();
+            Console.WriteLine();
+            Console.Write("Selecione o 1° jogador: ");
+            player1 = Jogo.SelecionarJogador();
+            Console.Clear();
+            Console.Write("Selecione o 2° jogador: ");
+            player2 = Jogo.SelecionarJogador();
             do
             {
                 Console.Clear();
-                Console.WriteLine("Player1:X and Player2:O");
-                Console.WriteLine("\n");
+                Console.WriteLine("{0}:X e {1}:O", player1 , player2);
+                Board();
+                turn++;
                 if (turn % 2 == 0)
                 {
-                    Console.WriteLine("Player 2 é a sua vez de jogar!");
+                    Console.WriteLine("{0} em qual posição gostaria de jogar!", player2);
                 }
                 else
                 {
-                    Console.WriteLine("Player 1 é a sua vez de jogar!");
+                    Console.WriteLine("{0} em qual posição gostaria de jogar!", player1);
                 }
-                Console.WriteLine("\n");
-                Board();
-                Console.Write("Gostaria de jogar em qual posição? ");
                 
                 int jogada = int.Parse(Console.ReadLine());
                 switch (jogada)
@@ -74,13 +87,11 @@ namespace GameHub.Jogos
                 {
                     if (turn % 2 == 0) 
                     {
-                        arr[l,c] = "O";
-                        turn++;
+                        arr[l,c] = "O";  
                     }
                     else
                     {
                         arr[l,c] = "X";
-                        turn++;
                     }
                 }
                 else
@@ -95,10 +106,48 @@ namespace GameHub.Jogos
             while (controle != 1 && controle != -1);
             Console.Clear();
             Board();
-            if (controle == 1)Console.WriteLine("O jogador {0} ganhou!", (turn % 2) + 1);
-            
-            else  Console.WriteLine("Deu empate!");
-            
+            if (controle == 1)
+            {
+                if (turn %2 == 0)
+                {
+                Console.WriteLine($"{player2} ganhou!");
+                    Jogador PontosGanhos = Program.jogadores.Find(delegate (Jogador j)
+                {
+                    return j.Nome == player2;
+                }); PontosGanhos.Pontuacao = PontosGanhos.Pontuacao + 10;
+
+                    Jogador PontosPerdidos = Program.jogadores.Find(delegate (Jogador j)
+                    {
+                        return j.Nome == player1;
+                    }); PontosPerdidos.Pontuacao = PontosPerdidos.Pontuacao - 5;
+                }
+                else
+                {
+                    Console.WriteLine($"{player1} ganhou!");
+                    Jogador PontosGanhos = Program.jogadores.Find(delegate (Jogador j)
+                    {
+                        return j.Nome == player1;
+                    }); PontosGanhos.Pontuacao = PontosGanhos.Pontuacao + 10;
+
+                    Jogador PontosPerdidos = Program.jogadores.Find(delegate (Jogador j)
+                    {
+                        return j.Nome == player2;
+                    }); PontosPerdidos.Pontuacao = PontosPerdidos.Pontuacao - 5;
+                }
+            }
+            else Console.WriteLine("Deu empate!");
+            Jogador PontosEmpate1 = Program.jogadores.Find(delegate (Jogador j)
+            {
+                return j.Nome == player1;
+            }); PontosEmpate1.Pontuacao = PontosEmpate1.Pontuacao + 5;
+
+            Jogador PontosEmpate2 = Program.jogadores.Find(delegate (Jogador j)
+            {
+                return j.Nome == player2;
+            }); PontosEmpate2.Pontuacao = PontosEmpate2.Pontuacao + 5;
+
+            Jogo.DeslogarJogador(player1, player2);
+            Jogo.AtualizarJogo();
             Console.ReadLine();
         }
         private static void Board()
@@ -135,12 +184,12 @@ namespace GameHub.Jogos
                 return 1;
             }
             
-            else if (arr[1,0] == arr[1,1] && arr[1,1] == arr[1,2])
+            else if (arr[0,1] == arr[1,1] && arr[1,1] == arr[2,1])
             {
                 return 1;
             }
             
-            else if (arr[2,0] == arr[2,1] && arr[2,1] == arr[2,2])
+            else if (arr[0,2] == arr[1,2] && arr[1,2] == arr[2,2])
             {
                 return 1;
             }

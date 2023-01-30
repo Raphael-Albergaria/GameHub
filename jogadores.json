@@ -1,30 +1,42 @@
 [
   {
-    "Nome": "Raphael",
-    "Pontuacao": 0
+    "Nome": "RAPHAEL",
+    "Pontuacao": 35,
+    "Jogando": false
   },
   {
-    "Nome": "Caroline",
-    "Pontuacao": 0
+    "Nome": "CAROLINE",
+    "Pontuacao": 25,
+    "Jogando": false
   },
   {
-    "Nome": "Gabriel",
-    "Pontuacao": 0
+    "Nome": "GABRIEL",
+    "Pontuacao": 10,
+    "Jogando": false
   },
   {
-    "Nome": "Michael",
-    "Pontuacao": 0
+    "Nome": "MICHAEL",
+    "Pontuacao": 5,
+    "Jogando": false
   },
   {
-    "Nome": "Tatiane",
-    "Pontuacao": 0
+    "Nome": "TATIANE",
+    "Pontuacao": 5,
+    "Jogando": false
   },
   {
-    "Nome": "Joao",
-    "Pontuacao": 0
+    "Nome": "JOSE",
+    "Pontuacao": 15,
+    "Jogando": false
   },
   {
-    "Nome": "Jose",
-    "Pontuacao": 0
+    "Nome": "LUIZ",
+    "Pontuacao": 20,
+    "Jogando": false
+  },
+  {
+    "Nome": "FABIO",
+    "Pontuacao": 5,
+    "Jogando": false
   }
 ]
