@@ -5,7 +5,7 @@ namespace GameHub.Repository;
 
 class JogadorRepository
 { 
-    private readonly string arquivoJson = "jogadores.json";
+    private readonly string arquivoJson = "../../../jogadores.json";
 
 
     public List<Jogador> LerTodos()

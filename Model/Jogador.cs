@@ -9,4 +9,9 @@ public class Jogador
     {
         return $"Nome: {Nome} | Pontuação: {Pontuacao}";
     }
+
+    public Jogador(string nome)
+    {
+        Nome = nome;
+    }
 }

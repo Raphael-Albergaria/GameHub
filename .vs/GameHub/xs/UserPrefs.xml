@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{76B682BE-83D2-4BD3-A3B2-1CABEA7B1265}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.GameHub PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="batalhaNaval.cs">
+    <Files>
+      <File FileName="Program.cs" Line="9" Column="6" />
+      <File FileName="Model/Jogador.cs" Line="16" Column="6" />
+      <File FileName="Repository/JogadorRepository.cs" Line="8" Column="47" />
+      <File FileName="batalhaNaval.cs" Line="6" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="GameHub" expanded="True">
+            <Node name="GameHub" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+              </Node>
+              <Node name="Model" expanded="True" />
+              <Node name="Repository" expanded="True" />
+              <Node name="batalhaNaval.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>
